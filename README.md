@@ -6,7 +6,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of multiplyR is to …
+The goal of multiplyR is to allow my three children to play with
+multiplication tables and experimenting their graphical representations
+through a shiny App (and to make dad feel less guilty when he is coding
+at home to experiment Bootstrap 5 functionnalities)
 
 ## Installation
 
@@ -16,4 +19,12 @@ You can install the development version of multiplyR from
 ``` r
 # install.packages("devtools")
 devtools::install_github("mhanf/multiplyR")
+```
+
+## Shiny apps
+
+You can launch the multiplyR shiny app with **(work in progress)** :
+
+``` r
+run_app_multiplyr()
 ```
