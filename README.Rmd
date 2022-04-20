@@ -30,8 +30,10 @@ devtools::install_github("mhanf/multiplyR")
 ```
 ## Shiny apps
 
-You can launch the multiplyR shiny app with **(work in progress)** :
+You can launch the multiplyR shiny app with :
 
 ``` r
 run_app_multiplyr()
 ```
+
+**!!! This work is in progress !!!**
