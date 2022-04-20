@@ -1,0 +1,1 @@
+$(window).on('load', function(){$('[data-bs-toggle=\"popover\"]').popover({html: true})});
