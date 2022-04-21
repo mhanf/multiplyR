@@ -8,8 +8,8 @@
 
 The goal of multiplyR is to allow my three children to play with
 multiplication tables and experimenting their graphical representations
-through a shiny App (and to make dad feel less guilty when he is coding
-at home to experiment Bootstrap 5 functionnalities)
+through a shiny App (and to make their dad feel less guilty when he is
+coding at home to experiment Bootstrap 5 functionalities)
 
 ## Installation
 
@@ -29,4 +29,4 @@ You can launch the multiplyR shiny app with :
 run_app_multiplyr()
 ```
 
-**!!! This work is in progress !!!**
+**!!! work in progress !!!**
