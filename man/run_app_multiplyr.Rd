@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_app_multiplyr.R
 \name{run_app_multiplyr}
 \alias{run_app_multiplyr}
-\title{Run the shiny multiplyr app}
+\title{Run the shiny multiplyr app \strong{work in progress}}
 \usage{
 run_app_multiplyr()
 }
@@ -10,5 +10,5 @@ run_app_multiplyr()
 Launching of the shiny multiplyr app
 }
 \description{
-Run the shiny multiplyr app
+Run the shiny multiplyr app \strong{work in progress}
 }
