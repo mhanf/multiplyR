@@ -6,6 +6,8 @@
 #' @import shiny
 #' @import bslib
 #' @import htmltools
+#' @importFrom waiter autoWaiter
+#'  @importFrom waiter spin_solar
 #' @importFrom colourpicker colourInput
 #' @examples
 
@@ -114,6 +116,10 @@ run_app_multiplyr <- function() {
   # Define UI
   ui <- shiny::bootstrapPage(
     theme = theme,
+    waiter::autoWaiter(html = waiter::spin_solar(),
+                       color = bslib::bs_get_variables(theme,"primary"),
+                       fadeout = 3000
+                       ),
     #title
     h3("Multiplication tables for my kids", class = "text-center fw-bold text-primary"),
     # canva

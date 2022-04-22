@@ -17,4 +17,5 @@ Imports:
     htmltools,
     magrittr,
     shiny,
-    tibble
+    tibble,
+    waiter
