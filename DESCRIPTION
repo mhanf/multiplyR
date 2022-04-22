@@ -1,5 +1,5 @@
 Package: multiplyR
-Title: What the Package Does (One Line, Title Case)
+Title: Allows Kids (And Adults) To Play With Multiplication Tables And Their Graphical Representations
 Version: 0.0.0.9000
 Authors@R: 
     person("matthieu", "hanf", , "matthieu.hanf@gmail.com", role = c("aut", "cre"),
