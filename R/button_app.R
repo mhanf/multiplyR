@@ -24,6 +24,30 @@ button_app <- function(id,
                         id_oc = NULL,
                         text = NULL,
                         icon = NULL){
+  # test id
+  if (is.null(id) == TRUE) {
+    stop("id can not be null")
+  }
+  # test color
+  if (test_bs_color(color) == FALSE){
+    stop("btn color must be primary, secondary, dark, light, info, danger, warning, success")
+  }
+  # test outline
+  if (is.logical(outline) == FALSE) {
+    stop("outline must be logical")
+  }
+  # test shadow
+  if (is.logical(shadow) == FALSE) {
+    stop("shadow must be logical")
+  }
+  # test oc
+  if (is.logical(oc) == FALSE) {
+    stop("oc must be logical")
+  }
+  # test id_oc
+  if (isTRUE(oc) & is.null(id_oc) == TRUE) {
+    stop("id_oc must be not be null")
+  }
   
   # default class
   class <- "btn w-100 action-button"
