@@ -6,8 +6,7 @@
 #' @import shiny
 #' @import bslib
 #' @import htmltools
-#' @importFrom waiter autoWaiter
-#'  @importFrom waiter spin_solar
+#' @import waiter
 #' @importFrom colourpicker colourInput
 #' @examples
 
@@ -116,10 +115,7 @@ run_app_multiplyr <- function() {
   # Define UI
   ui <- shiny::bootstrapPage(
     theme = theme,
-    waiter::autoWaiter(html = waiter::spin_solar(),
-                       color = bslib::bs_get_variables(theme,"primary"),
-                       fadeout = 3000
-                       ),
+    waiter::useWaiter(),
     #title
     h3("Multiplication tables for my kids", class = "text-center fw-bold text-primary"),
     # canva
@@ -156,6 +152,7 @@ run_app_multiplyr <- function() {
               button_app(
                 id = "btn1",
                 color = "primary",
+                add_class = "w-100",
                 outline = TRUE,
                 oc = TRUE,
                 id_oc = "id_oc",
@@ -171,12 +168,10 @@ run_app_multiplyr <- function() {
             color = "primary",
             tag = div(
               class = "w-25 me-1",
-              button_app(
-                id = "btn2",
-                color = "primary",
-                outline = TRUE,
-                icon = icon("copy")
-              )
+              dwld_button_app("btn2", 
+                              icon = icon("copy"), 
+                              label ="", 
+                              class = "btn-outline-primary w-100 shadow")
             )
           ),
           # third button : about this site
@@ -191,6 +186,7 @@ run_app_multiplyr <- function() {
                 id = "btn3",
                 color = "primary",
                 outline = TRUE,
+                add_class = "w-100",
                 icon = icon("question")
               )
             )
@@ -207,6 +203,7 @@ run_app_multiplyr <- function() {
                 id = "btn4",
                 href = "https://github.com/mhanf/multiplyR",
                 color = "primary",
+                add_class = "w-100",
                 outline = TRUE,
                 icon = icon("github")
               )
@@ -226,16 +223,28 @@ run_app_multiplyr <- function() {
                        div(class = "card p-0 shadow h-100 rounded-5 border-primary",
                            div(
                              class = "ratio ratio-1x1",
-                             shiny::plotOutput("distPlot", width = "100%", height = "100%")
-                           ))
+                             shiny::plotOutput("plot",width="100%",height = "100%")
+                           )
+                       )
                      )))
     )
   )
   
   # Define server logic
   server <- function(input, output) {
-    shiny::observeEvent(input$ok, {
-      graph <- graph_line(
+    # waiter initiation
+    w <- waiter::Waiter$new(id = "plot",
+                            html = tagList(
+                              bs5_spinner(style = "spin",color = "primary"),
+                              h4("Be patient...",class="text-primary")),
+                            color = "white"
+    )
+    # reactive value initiation
+    reactlist <- reactiveValues(graph = NULL)
+    # observe event parameter validation
+    observeEvent(input$ok,{
+      w$show()
+      reactlist$graph <- graph_line(
         nb_vertice = as.numeric(input$vertice),
         modulo = as.numeric(input$modulo),
         table = as.numeric(input$table),
@@ -246,11 +255,16 @@ run_app_multiplyr <- function() {
         bgcolor = input$bgcolor,
         zoom = as.numeric(input$zoom)
       )
-      
-      output$distPlot <- shiny::renderPlot({
-        graph
-      })
+    })   
+    # plot update
+    output$plot <- shiny::renderPlot({ 
+      reactlist$graph 
     })
+    # download button
+    output$btn2 <- shiny::downloadHandler(
+      filename = function(){paste("input$plot3",'.png',sep='')},
+      content = function(file){ ggsave(file,plot = reactlist$graph) }
+    )
   }
   # launch
   shiny::shinyApp(ui = ui, server = server)
