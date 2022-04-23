@@ -2,7 +2,7 @@
 % Please edit documentation in R/button_app.R
 \name{button_app}
 \alias{button_app}
-\title{Creation of a bootstrap 5 button \strong{work in progress}}
+\title{Creation of a bootstrap 5 button}
 \usage{
 button_app(
   id,
@@ -10,10 +10,13 @@ button_app(
   href = NULL,
   outline = FALSE,
   shadow = TRUE,
+  disabled = FALSE,
+  size = "md",
   oc = FALSE,
   id_oc = NULL,
   text = NULL,
-  icon = NULL
+  icon = NULL,
+  add_class = NULL
 )
 }
 \arguments{
@@ -23,21 +26,27 @@ button_app(
 
 \item{href}{link to an external website (default = NULL)}
 
-\item{outline}{outline button ? (TRUE/FALSE)}
+\item{outline}{outline button ? (TRUE or FALSE)}
 
 \item{shadow}{shadow around button ? (TRUE/FALSE)}
 
-\item{oc}{Trigger off canvas ? (TRUE/FALSE)}
+\item{disabled}{disabled state (TRUE or FALSE)}
+
+\item{size}{size of button (sm, md or lg)}
+
+\item{oc}{Trigger off canvas ? (TRUE or FALSE)}
 
 \item{id_oc}{if oc is TRUE id of the oc to trigger}
 
 \item{text}{Text label (default = NULL)}
 
 \item{icon}{Icon label (default = NULL)}
+
+\item{add_class}{button supplementary class}
 }
 \value{
 a bootstrap 5 button
 }
 \description{
-Creation of a bootstrap 5 button \strong{work in progress}
+Creation of a bootstrap 5 button
 }
