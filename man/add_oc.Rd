@@ -7,7 +7,7 @@
 add_oc(
   id = NULL,
   body = NULL,
-  position = "start",
+  position = c("top", "bottom", "start", "end"),
   scroll = FALSE,
   backdrop = TRUE,
   header = TRUE,

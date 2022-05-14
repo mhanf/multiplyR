@@ -35,7 +35,7 @@
 
 add_oc <- function(id = NULL,
                    body = NULL,
-                   position = "start",
+                   position = c("top", "bottom", "start", "end"),
                    scroll = FALSE,
                    backdrop = TRUE,
                    header = TRUE,
@@ -83,21 +83,22 @@ add_oc <- function(id = NULL,
     }
     # header class
     tag_header <- div(
-      class = paste("offcanvas-header bg-default", class_header),
+      class = sprintf("offcanvas-header bg-default %s",class_header),
       title,
       tag_button
     )
   }
   # off canvas
   tag <- div(
-    class = paste0("offcanvas offcanvas-", position, " ", class_oc),
+    class = sprintf("offcanvas offcanvas-%s %s",position, class_oc),
     tabindex = "-1",
     id = id,
     'aria-labelledby' = paste0(id, "label"),
     'data-bs-scroll' = tolower(as.character(scroll)),
     'data-bs-backdrop' = tolower(as.character(backdrop)),
     tag_header,
-    div(class = paste("offcanvas-body", class_body), body)
+    div(class = sprintf("offcanvas-body %s",class_body),
+        body)
   )
   # return
   return(tag)

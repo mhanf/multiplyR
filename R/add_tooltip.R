@@ -29,10 +29,19 @@
 #' )
 
 add_tooltip <- function(tag = NULL,
-                        position = "top",
-                        trigger = "hover focus",
+                        position = c("top", "bottom", "left", "right"),
+                        trigger = c("focus", "hover", "hover focus"),
                         text = NULL,
-                        color = "black") {
+                        color = c("primary", 
+                                  "secondary", 
+                                  "dark", 
+                                  "light", 
+                                  "info", 
+                                  "danger", 
+                                  "warning", 
+                                  "success", 
+                                  "black", 
+                                  "white")) {
   # dependencies from text
   text_dep <- htmltools::findDependencies(text)
   # denpendencies from tag
@@ -69,8 +78,8 @@ add_tooltip <- function(tag = NULL,
   # class definition
   text_color <- "white"
   if (color == "light" | color == "white"){text_color = "black"}
-  class_arrow <- paste0("popover-arrow popover-arrow-", color)
-  class_inner <- paste0("tooltip-inner ", "tooltip-inner-", color," text-",text_color)
+  class_arrow <- sprintf("popover-arrow popover-arrow-%s", color)
+  class_inner <- sprintf("tooltip-inner tooltip-inner-%s text-%s", color, text_color)  
   # template definition
   template_tooltip <- shiny::div(
     class = "popover",

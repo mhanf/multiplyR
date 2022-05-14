@@ -13,6 +13,7 @@ Imports:
     bslib,
     colourpicker,
     dplyr,
+    ggfx,
     ggplot2,
     htmltools,
     magrittr,

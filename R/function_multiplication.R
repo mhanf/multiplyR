@@ -74,6 +74,7 @@ coord_point_pg <- function(nb_vertice,modulo){
 #' @importFrom tibble tibble
 #' @importFrom magrittr %>%
 #' @import dplyr
+#' @import ggfx
 #' @return return coordinates of segments
 #' @export
 #'
@@ -112,6 +113,14 @@ coord_line <- function(nb_vertice, modulo, table){
 #' @param alpha Alpha level of segment color
 #' @param colour Segment color
 #' @param table desired multiplication table
+#' @param outer_glow outer glow (TRUE/FALSE)
+#' @param outer_glow_color outer glow color
+#' @param outer_glow_sigma outer glow sigma
+#' @param outer_glow_expand outer glow expand
+#' @param inner_glow inner glow (TRUE/FALSE)
+#' @param inner_glow_color inner glow color
+#' @param inner_glow_sigma inner glow sigma
+#' @param inner_glow_expand inner glow expand
 #'
 #' @import ggplot2
 #' @import dplyr
@@ -130,16 +139,62 @@ coord_line <- function(nb_vertice, modulo, table){
 #' angle = 0,
 #' colour = "#2c3e50")
 
-graph_line <- function(nb_vertice, modulo, table, zoom = 1, bgcolor = "transparent", curvature, angle, alpha, colour){
+graph_line <- function(nb_vertice, 
+                       modulo, 
+                       table, 
+                       zoom = 1, 
+                       bgcolor = "transparent", 
+                       curvature, 
+                       angle, 
+                       alpha, 
+                       colour,
+                       outer_glow = TRUE,
+                       outer_glow_color = "#18BC9C",
+                       outer_glow_sigma = 1,
+                       outer_glow_expand = 1,
+                       inner_glow = TRUE,
+                       inner_glow_color = "#18BC9C",
+                       inner_glow_sigma = 0.5,
+                       inner_glow_expand = 1
+                       ){
   
   x1 <- x2 <- y1 <- y2 <- NULL
   
+  curve <- ggplot2::geom_curve(curvature = curvature, 
+                               angle = angle, 
+                               alpha = alpha, 
+                               size =1.5,
+                               colour = colour)
+  
+  # outer glow
+  if (isTRUE(outer_glow)) {
+    curve <- ggfx:: with_outer_glow(curve, 
+                                    colour = outer_glow_color, 
+                                    sigma = outer_glow_sigma, 
+                                    expand = outer_glow_expand)
+  }
+  # inner glow
+  if (isTRUE(inner_glow)) {
+    curve <- ggfx:: with_inner_glow(curve, 
+                                    colour = inner_glow_color, 
+                                    sigma = inner_glow_sigma, 
+                                    expand = inner_glow_expand)
+  }
   # suppression of "points" segments
-  lines <- coord_line(nb_vertice = nb_vertice, modulo = modulo, table = table)%>%
+  lines <- coord_line(nb_vertice = nb_vertice, 
+                      modulo = modulo, 
+                      table = table
+                      )%>%
     dplyr::filter(!(x1 == x2 & y1 == y2))
   # graph
-  graph <- ggplot2::ggplot(data=lines, aes(x = x1, y = y1, xend = x2, yend = y2))+
-    ggplot2::geom_curve(curvature = curvature, angle = angle, alpha = alpha, colour = colour)+
+  graph <- ggplot2::ggplot(data=lines, 
+                           aes(x = x1, 
+                               y = y1, 
+                               xend = x2,
+                               yend = y2
+                               )
+                           )+
+    curve +
     xlim(-zoom,zoom)+
     ylim(-zoom,zoom)+
     ggplot2::theme_void()+

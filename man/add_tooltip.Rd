@@ -6,10 +6,11 @@
 \usage{
 add_tooltip(
   tag = NULL,
-  position = "top",
-  trigger = "hover focus",
+  position = c("top", "bottom", "left", "right"),
+  trigger = c("focus", "hover", "hover focus"),
   text = NULL,
-  color = "black"
+  color = c("primary", "secondary", "dark", "light", "info", "danger", "warning",
+    "success", "black", "white")
 )
 }
 \arguments{

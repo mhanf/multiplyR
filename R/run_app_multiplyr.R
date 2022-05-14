@@ -98,6 +98,14 @@ run_app_multiplyr <- function() {
         value = '#FFFFFF'
       )
     ),
+    # outer glow
+    glow_btn(label = "Outer glow",
+             default_color = bslib::bs_get_variables(theme, "warning")
+             ),
+    glow_btn(label = "Inner glow",
+             default_color = bslib::bs_get_variables(theme, "danger")
+    ),
+    # validation button
     br(),
     div(
       class = "d-grid gap-2 d-block",
@@ -253,6 +261,14 @@ run_app_multiplyr <- function() {
         angle = as.numeric(input$angle),
         colour = input$color,
         bgcolor = input$bgcolor,
+        outer_glow = input$outer_glow,
+        outer_glow_color = input$outer_glow_color,
+        outer_glow_sigma = as.numeric(input$outer_glow_sigma),
+        outer_glow_expand = as.numeric(input$outer_glow_expand),
+        inner_glow = input$inner_glow,
+        inner_glow_color = input$inner_glow_color,
+        inner_glow_sigma = as.numeric(input$inner_glow_sigma),
+        inner_glow_expand = as.numeric(input$inner_glow_expand),
         zoom = as.numeric(input$zoom)
       )
     })   

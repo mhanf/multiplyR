@@ -13,7 +13,15 @@ graph_line(
   curvature,
   angle,
   alpha,
-  colour
+  colour,
+  outer_glow = TRUE,
+  outer_glow_color = "#18BC9C",
+  outer_glow_sigma = 1,
+  outer_glow_expand = 1,
+  inner_glow = TRUE,
+  inner_glow_color = "#18BC9C",
+  inner_glow_sigma = 0.5,
+  inner_glow_expand = 1
 )
 }
 \arguments{
@@ -34,6 +42,22 @@ graph_line(
 \item{alpha}{Alpha level of segment color}
 
 \item{colour}{Segment color}
+
+\item{outer_glow}{outer glow (TRUE/FALSE)}
+
+\item{outer_glow_color}{outer glow color}
+
+\item{outer_glow_sigma}{outer glow sigma}
+
+\item{outer_glow_expand}{outer glow expand}
+
+\item{inner_glow}{inner glow (TRUE/FALSE)}
+
+\item{inner_glow_color}{inner glow color}
+
+\item{inner_glow_sigma}{inner glow sigma}
+
+\item{inner_glow_expand}{inner glow expand}
 }
 \value{
 a graphic of the multiplication table
